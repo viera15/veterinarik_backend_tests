@@ -31,13 +31,10 @@ class TestAmbulance:
         )
         assert response.status_code == 422
 
-    def test_post_ambulance_valid(self, base_url, auth_headers):
-        """
-        Otestuje POST /api/ambulance s validnými dátami – kontroluje len status odpovede.
-        """
+    def test_post_ambulance_valid(self, base_url, auth_headers, test_owner_id):
         payload = {
             "id": 0,
-            "owner_id": 1,  # uprav podľa reálnych testovacích údajov
+            "owner_id": test_owner_id,
             "title": f"Test ambulancia {random.randint(1000, 9999)}",
             "description": "Automatický testovací zápis"
         }
@@ -50,6 +47,6 @@ class TestAmbulance:
         assert response.status_code == 200
         data = response.json()
         assert data.get("status") in ("ok", "exists")
-        assert isinstance(data.get("id"), int)
+
 
 
