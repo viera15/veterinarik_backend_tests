@@ -32,7 +32,6 @@ def test_login_valid_user(base_url, registered_user_credentials):
     assert isinstance(response_data, dict)
     assert response_data.get("login") == registered_user_credentials["login"]
 
-@pytest.mark.skip(reason="Backend vracia 200 aj pre neplatné heslo – treba opraviť")
 def test_login_invalid_password(base_url, registered_user_credentials):
     response = requests.get(
         f"{base_url}/api/login",
@@ -40,7 +39,6 @@ def test_login_invalid_password(base_url, registered_user_credentials):
     )
     assert response.status_code in (401, 403)
 
-@pytest.mark.skip(reason="Backend vracia 200 aj pre neexistujúceho používateľa – treba opraviť")
 def test_login_nonexistent_user(base_url):
     response = requests.get(
         f"{base_url}/api/login",
@@ -48,7 +46,6 @@ def test_login_nonexistent_user(base_url):
     )
     assert response.status_code in (401, 403)
 
-@pytest.mark.skip(reason="Backend vracia 200 aj pre chýbajúce heslo – treba opraviť")
 def test_login_missing_password(base_url, registered_user_credentials):
     """
     Overí, že prihlásenie bez hesla zlyhá.

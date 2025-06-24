@@ -2,6 +2,15 @@
 import pytest
 import requests
 import random
+import os
+import sys
+
+# nastav koreňový adresár (tam, kde je `utils`)
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
+from veterinarik_backend_tests.utils.api_helpers import extract_items, is_security_restricted
 
 
 class TestAmbulance:
@@ -11,6 +20,8 @@ class TestAmbulance:
         Otestuje GET /api/ambulance – získa zoznam ambulancií.
         """
         response = requests.get(f"{base_url}/api/ambulance", headers=auth_headers)
+        if is_security_restricted(response):
+            pytest.skip("🔐 Používateľ nemá oprávnenie čítať ambulancie.")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list) or isinstance(data, dict)
@@ -48,16 +59,11 @@ class TestAmbulance:
             headers=auth_headers
         )
 
-        # Overíme stavový kód
+        if is_security_restricted(response):
+            pytest.skip("🔐 Používateľ nemá oprávnenie na vytváranie ambulancií.")
+
         assert response.status_code == 200, f"❌ Neočakávaný status: {response.status_code}, odpoveď: {response.text}"
 
         data = response.json()
-        
-        # Overenie očakávaného statusu zo strany backendu
-        assert data.get("status") in ("ok", "exists", "unauthorized", "forbidden"), \
-            f"❌ Neočakávaný 'status': {data}"
-
-        # Extra kontrola oprávnenia
-        if data.get("status") in ("unauthorized", "forbidden"):
-            pytest.skip("🔐 Používateľ nemá oprávnenie na vytváranie ambulancií.")
+        assert data.get("status") in ("ok", "exists"), f"❌ Neočakávaný 'status': {data}"
 
