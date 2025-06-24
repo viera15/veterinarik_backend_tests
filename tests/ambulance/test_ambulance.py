@@ -44,7 +44,7 @@ class TestAmbulance:
 
     def test_post_ambulance_valid(self, base_url, auth_headers, test_owner_id):
         """
-        Otestuje POST /api/ambulance s validnými dátami.
+        Otestuje vytvorenie ambulancie. Otestuje POST /api/ambulance s validnými dátami.
         """
         payload = {
             "id": 0,  # ID sa má nastaviť automaticky
