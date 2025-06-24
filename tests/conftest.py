@@ -2,6 +2,9 @@ import pytest
 import requests
 import os
 from dotenv import load_dotenv
+import random
+import string
+import requests
 
 # Načítaj .env súbor
 load_dotenv()
@@ -50,3 +53,18 @@ def test_owner_id():
 @pytest.fixture(scope="session")
 def test_vet_id():
     return int(os.getenv("TEST_VET_ID", "0"))
+
+@pytest.fixture(scope="session")
+def registered_user_credentials(base_url):
+    suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+    login = f"autotest_{suffix}@example.com"
+    password = "SilneHeslo123!"
+
+    response = requests.post(f"{base_url}/api/register", json={
+        "name": f"AutoTest {suffix}",
+        "login": login,
+        "password": password
+    })
+
+    assert response.status_code == 200, "❌ Registrácia používateľa zlyhala"
+    return login, password
