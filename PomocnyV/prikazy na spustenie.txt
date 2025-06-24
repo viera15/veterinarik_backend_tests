@@ -1,5 +1,0 @@
-pytest tests/auth/test_login.py
-
-pytest tests/ambulance/test_ambulance.py
-
-pytest tests/owner/test_owner.py

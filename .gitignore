@@ -1,4 +1,8 @@
+# adresár, ktorý sa používa na pomocné súbory
+PomocnyV 
+
+# Ignorovanie súborov a adresárov pre testy backendu Veterinarik
 __pycache__/
 *.pyc
 .env
-PomocnyV # adresár, ktorý sa používa na pomocné súbory
+
