@@ -1,18 +1,4 @@
-# Ignorovanie súborov a priečinkov v repozitári
-PomocnyV
-
-# Prostredie a závislosti
-.venv/
-venv/
 __pycache__/
 *.pyc
-
-# Nastavenia editorov
-.vscode/
-.idea/
-
-# Ostatné dočasné alebo lokálne súbory
 .env
-*.log
-*.bak
-*.tmp
+PomocnyV # adresár, ktorý sa používa na pomocné súbory

@@ -1,0 +1,49 @@
+veterinarik_backend_tests/
+├── __init__.py
+├── config/                         # Konfigurácie, premenné prostredia, utility
+│   └── settings.py
+├── data/                           # Testovacie dáta (napr. .json alebo .csv)
+│   ├── animals.json
+│   └── users.csv
+├── test_base/                      # Základné testy (DB, cache, healthcheck)
+│   ├── test_db_connection.py
+│   └── test_cache_connection.py
+├── auth/                           # Autentifikácia a registrácia
+│   ├── test_login.py
+│   ├── test_register.py
+│   ├── test_register_google.py
+│   ├── test_forgot_password.py
+│   └── test_reset_password.py
+├── ambulance/                      # Ambulancie a asociácie
+│   ├── test_get_ambulance.py
+│   ├── test_post_ambulance.py
+│   ├── test_delete_ambulance.py
+│   ├── test_get_asoc.py
+│   ├── test_post_asoc.py
+│   └── test_delete_asoc.py
+├── owner/                          # Majitelia
+│   ├── test_get_owner.py
+│   ├── test_post_owner.py
+│   ├── test_delete_owner.py
+│   └── test_search_owner.py
+├── animal/                         # Zvieratá
+│   ├── test_get_animal.py
+│   ├── test_post_animal.py
+│   ├── test_search_animal.py
+│   └── test_search_animal_with_query.py
+├── record/                         # Záznamy o zvieratách
+│   ├── test_post_record.py
+│   ├── test_get_record_by_animal.py
+│   └── test_search_record.py
+├── reception/                      # Recepcia
+│   ├── test_post_reception.py
+│   ├── test_get_reception_by_id.py
+│   └── test_get_reception_list.py
+├── template/                       # Šablóny
+│   ├── test_get_templates.py
+│   ├── test_post_template.py
+│   └── test_delete_template.py
+├── testing_module/                 # Interné testy modulu
+│   ├── test_post_testing.py
+│   └── test_get_testing.py
+└── conftest.py                     # Fixture-y pre Pytest

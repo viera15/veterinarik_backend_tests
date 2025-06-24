@@ -7,12 +7,18 @@ import pytest
 class TestRegisterUser:
 
     def generate_unique_user(self):
-        suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+        """ 
+        Vytvorí unikátneho testovacieho používateľa s náhodným emailom. 
+        Používa email ako login, čo je vyžadované frontendovou aplikáciou."""
+        suffix = "".join(random.choices(string.ascii_lowercase + string.digits, k=6))
+        email = f"testuser_{suffix}@example.com"
         return {
             "name": f"Testovací Používateľ {suffix}",
-            "login": f"test_user_{suffix}",
+            "login": email,               # <- login = email
+            "email": email,               # <- frontend ho vyžaduje
             "password": "Heslo123!"
         }
+
 
     def test_register_valid_user(self, base_url):
         """
