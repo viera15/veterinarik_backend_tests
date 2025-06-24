@@ -18,3 +18,12 @@ def extract_items(response_data, key="items"):
     elif isinstance(response_data, str):
         return []
     return []
+
+def is_security_restricted(data: dict) -> bool:
+    return (
+        isinstance(data, dict) and (
+            data.get("status") == "security"
+            or "unauthorized" in data.get("message", "").lower()
+            or "access denied" in data.get("message", "").lower()
+        )
+    )
