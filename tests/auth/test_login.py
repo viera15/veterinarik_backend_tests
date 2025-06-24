@@ -5,6 +5,9 @@ import requests
 
 class TestLogin:
     def test_status_code(self, base_url):
+        """ 
+        Otestuje GET /api/login – očakávame 200. 
+        """
         response = requests.get(
             f"{base_url}/api/login",
             auth=(os.getenv("TEST_USERNAME"), os.getenv("TEST_PASSWORD"))
@@ -12,6 +15,9 @@ class TestLogin:
         assert response.status_code == 200
 
     def test_token_present(self, base_url):
+        """ 
+        Otestuje, či sa v odpovedi nachádza token. 
+        """
         response = requests.get(
             f"{base_url}/api/login",
             auth=(os.getenv("TEST_USERNAME"), os.getenv("TEST_PASSWORD"))
