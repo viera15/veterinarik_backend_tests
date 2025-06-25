@@ -44,6 +44,12 @@ def auth_headers(base_url):
     token = response.json().get("access_token") or response.json().get("token")
     return {"Authorization": f"Bearer {token}"}
 
+@pytest.fixture
+def auth_headers_other_user():
+    token = "Bearer tvoj_druhy_token_sem"
+    return {"Authorization": token}
+
+
 
 @pytest.fixture(scope="session")
 def test_owner_id():
