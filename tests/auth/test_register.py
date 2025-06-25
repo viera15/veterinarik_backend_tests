@@ -41,6 +41,7 @@ class TestRegisterUser:
         # 👉 voliteľne: ulož prihlasovacie údaje pre ďalšie testy
         self.login = user_data["login"]
         self.password = user_data["password"]
+        
     def test_register_invalid_user(self, base_url):
         """
         Overí, že registrácia neprejde pri nevalidných dátach.
@@ -86,25 +87,33 @@ class TestRegisterUser:
         assert second_response.status_code == 200
         assert second_response.json().get("status") == "exists"
 
-   
-
-    @pytest.mark.skip(reason="Backend zatiaľ nevaliduje login ako email")
-    def test_register_invalid_login_format(self, base_url):
+    @pytest.mark.parametrize("invalid_email", [
+        "neplatny_format",
+        "neplatny@",
+        "@bezmena.sk",
+        "test@neplatna.",
+        "test@.com",
+        "test@doména"
+    ])
+    def test_register_invalid_login_format(self, base_url, invalid_email):
         """
-        Overí, že registrácia neprejde, ak login nie je vo forme emailu.
+        Overí, že registrácia neprejde, ak login nie je vo forme validného emailu.
+        Backend vracia 200 OK, ale v tele odpovede status 'e_email'.
         """
         invalid_data = {
             "name": "Zlý Login",
-            "login": "neplatny_login_bez_zavinaca",
-            "password": "Heslo123!"
+            "login": invalid_email,
+            "password": "Silneheslo123!"
         }
 
         response = requests.post(f"{base_url}/api/register", json=invalid_data)
 
-        assert response.status_code in (400, 422), "Očakávaná chyba pri zlom formáte loginu"
+        assert response.status_code == 200, f"Očakávaný 200 OK, ale prišiel {response.status_code}"
+
         response_data = response.json()
-        assert isinstance(response_data, dict)
-        assert "detail" in response_data
+        assert isinstance(response_data, dict), "Očakávaný JSON objekt"
+        assert response_data.get(
+            "status") == "e_email", f"Očakávaný status 'e_email', ale bol: {response_data.get('status')}"
 
     def test_register_short_password(self, base_url):
         """
