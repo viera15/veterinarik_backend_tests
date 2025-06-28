@@ -2,7 +2,7 @@ import pymysql
 from config.db_config import DB_CONFIG
 
 def get_columns_metadata(table_name: str):
-    """Získa zoznam stĺpcov s typmi a nullovateľnosťou."""
+    """Získa zoznam stĺpcov s typmi a nullovateľnosťou (nesmie byť prázdny)."""
     conn = pymysql.connect(**DB_CONFIG)
     try:
         with conn.cursor() as cursor:
