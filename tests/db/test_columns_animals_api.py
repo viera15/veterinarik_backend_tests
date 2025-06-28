@@ -29,7 +29,7 @@ expected_foreign_keys = {
 
 def get_columns_metadata():
 
-    """ Testovacia funkcia na získanie metadát stĺpcov tabuľky `animals`.
+    """ Pomocná funkcia na získanie metadát stĺpcov tabuľky `animals`.
     Vráti zoznam stĺpcov s ich názvami, typmi a nullovateľnosťou.
     V prípade, že sa nepodarí pripojiť k databáze, vyvolá výnimku.
     """
@@ -44,7 +44,7 @@ def get_columns_metadata():
 
 def get_foreign_keys():
 
-    """ Testovacia funkcia na získanie CUDZÍCH kľúčov tabuľky `animals`.
+    """ Pomocná funkcia na získanie CUDZÍCH kľúčov tabuľky `animals`.
     Vráti množinu cudzích kľúčov vo forme (stĺpec, odkazovaná_tabulka, odkazovaný_stĺpec).
     V prípade, že sa nepodarí pripojiť k databáze, vyvolá výnimku.
     """
@@ -64,7 +64,7 @@ def get_foreign_keys():
 
 def get_primary_key():
 
-    """ Testovacia funkcia na ZÍSKANIE primárneho kľúča tabuľky `animals`.
+    """ Pomocná funkcia na ZÍSKANIE primárneho kľúča tabuľky `animals`.
     Vráti názov primárneho kľúca.
     V prípade, že sa nepodarí pripojiť k databáze, vyvolá výnimku.
     """

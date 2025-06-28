@@ -17,7 +17,7 @@ expected_tables = {
 
 def fetch_existing_tables():
     """
-    Testovacia funkcia na získanie existujúcich tabuliek v databáze.
+    Pomocná funkcia na získanie existujúcich tabuliek v databáze.
     Používa sa na porovnanie s očakávanými tabuľkami.
     Vráti množinu názvov tabuliek.
     V prípade, že sa nepodarí pripojiť k databáze, vyvolá výnimku.
